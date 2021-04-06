@@ -23,6 +23,6 @@ def preenche_formulario(context):
 
 
 @then(u'devo ser logado na plataforma')
-def envia_formulario(context):
+def checa_icone_usuario_logado(context):
     time.sleep(2)
     context.usuario_icon = context.web.find_element_by_id('user')
