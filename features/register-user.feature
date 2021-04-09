@@ -12,4 +12,4 @@ Entao devo ser registrado na plataforma e enviado para a segunda etapa
 Cenario: Preencher a segunda etapa do cadastro
 Dado estou na pagina da segunda etapa do cadastro
 Quando preencho a segunda etapa do formulario de cadastro
-Entao devo ser enviado para a terceira etapa
+Entao devo ser redirecionado para a terceira etapa

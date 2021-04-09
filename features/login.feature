@@ -5,5 +5,10 @@ Funcionalidade: Logar no sistema com um usuário existente
 
 Cenario: Logar no sistema com um usuário existente
 Dado acesso a pagina inicial do Conectar
-Quando preencho o formulario com dados cadastrados na base
+Quando preencho o formulario de login com dados cadastrados na base
 Entao devo ser logado na plataforma
+
+Cenario: Redirecionamento para o Explorar após login
+Dado acesso a pagina inicial do Conectar
+Quando preencho o formulario de login com dados cadastrados na base
+Entao devo ser redirecionado para a página Explorar

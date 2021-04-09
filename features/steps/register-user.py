@@ -108,7 +108,7 @@ def preenche_etapa2_formulario(context):
     context.continuar_btn.click()
 
 
-@then(u'devo ser enviado para a terceira etapa')
+@then(u'devo ser redirecionado para a terceira etapa')
 def checa_terceira_etapa_cadastro(context):
     if 'Nos conte sua experiência' in context.web.page_source:
         return True

@@ -10,7 +10,7 @@ def abre_pagina(context):
     context.web.get(base_url)
 
 
-@when(u'preencho o formulario com dados cadastrados na base')
+@when(u'preencho o formulario de login com dados cadastrados na base')
 def preenche_formulario(context):
     context.usuario_input = context.web.find_element_by_id('email')
     context.usuario_input.send_keys('francisco@gmail.com')
@@ -26,3 +26,11 @@ def preenche_formulario(context):
 def checa_icone_usuario_logado(context):
     time.sleep(2)
     context.usuario_icon = context.web.find_element_by_id('user')
+
+
+@then(u'devo ser redirecionado para a página Explorar')
+def checa_redirecionado_explorar(context):
+    if "/explorar" in context.web.current_url:
+        return True
+    else:
+        return False
