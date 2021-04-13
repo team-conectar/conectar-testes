@@ -39,7 +39,7 @@ def preenche_etapa1_formulario(context):
 def checa_segunda_etapa_cadastro(context):
     wait = WebDriverWait(context.web, 3)
     wait.until(ec.visibility_of_element_located(
-        (By.CLASS_NAME, 'segunda-etapa')))
+        (By.CLASS_NAME, 'segunda-etapa')), message='Painel de "Segunda Etapa" era esperado e não foi encontrado.')
 
 
 @given(u'estou na pagina da segunda etapa do cadastro')
@@ -62,7 +62,7 @@ def preenche_etapa2_formulario(context):
 
     wait = WebDriverWait(context.web, 3)
     wait.until(ec.element_to_be_clickable(
-        (By.CSS_SELECTOR, 'div.react-select__menu')))
+        (By.CSS_SELECTOR, 'div.react-select__menu')), message='Select de "Ano" era esperado e não foi encontrado.')
 
     context.year_selector = context.web.find_element_by_css_selector(
         'div.react-select__menu')
@@ -76,7 +76,7 @@ def preenche_etapa2_formulario(context):
 
     wait = WebDriverWait(context.web, 3)
     wait.until(ec.element_to_be_clickable(
-        (By.CSS_SELECTOR, 'div.react-select__menu')))
+        (By.CSS_SELECTOR, 'div.react-select__menu')), message='Select de "Mês" era esperado e não foi encontrado.')
 
     context.year_selector = context.web.find_element_by_css_selector(
         'div.react-select__menu')
@@ -90,7 +90,7 @@ def preenche_etapa2_formulario(context):
 
     wait = WebDriverWait(context.web, 3)
     wait.until(ec.element_to_be_clickable(
-        (By.CSS_SELECTOR, 'div.react-select__menu')))
+        (By.CSS_SELECTOR, 'div.react-select__menu')), message='Select de "Dia" era esperado e não foi encontrado.')
 
     context.year_selector = context.web.find_element_by_css_selector(
         'div.react-select__menu')
@@ -111,4 +111,5 @@ def preenche_etapa2_formulario(context):
 @then(u'devo ser redirecionado para a terceira etapa')
 def checa_terceira_etapa_cadastro(context):
     if 'Nos conte sua experiência' not in context.web.page_source:
-        raise Exception('Texto "Nos conte sua experiência" era esperado e não foi encontrado.')
+        raise Exception(
+            'Texto "Nos conte sua experiência" era esperado e não foi encontrado.')

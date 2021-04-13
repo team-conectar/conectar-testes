@@ -19,7 +19,7 @@ def preenche_etapa1_formulario(context):
 
     wait = WebDriverWait(context.web, 3)
     context.area_desenvolvimento = wait.until(ec.presence_of_element_located(
-        (By.XPATH, '//*[@id="root"]/div/main/form/div[2]/div/div/div[2]/ul/li[1]')))
+        (By.XPATH, '//*[@id="root"]/div/main/form/div[2]/div/div/div[2]/ul/li[1]')), message='Lista de "Areas de Desenvolvimento" era esperado e não foi encontrada.')
 
     context.area_desenvolvimento.click()
 
