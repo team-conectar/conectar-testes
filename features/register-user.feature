@@ -20,3 +20,7 @@ Quando clico no botao de adicionar cadastro de Educação
 Quando preencho a etapa de Educação do formulario de cadastro
 Quando clico no botao de salvar cadastro de Educação
 Entao uma nova experiencia educacional deve ser cadastrada
+
+# TO-DO: Escrever cenário de Atuação Profissional
+
+# TO-DO: Escrever cenário de Projetos
