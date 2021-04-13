@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as ec
 import time
-from utils.data_generator import name_generator, email_generator, username_generator, password_generator
+from utils.data_generator import name_generator, email_generator, username_generator, password_generator, description_generator
 
 
 @when(u'clico no botao de cadastro')
@@ -100,16 +100,58 @@ def preenche_etapa2_formulario(context):
     context.year_option.click()
 
     context.idealizador_check = context.web.find_element_by_xpath(
-        '/html/body/div[1]/div/form/div/section[2]/fieldset[1]/aside/div/label')
+        '//*[@id="root"]/div/form/div/section[2]/fieldset[1]/aside/div/label')
     context.idealizador_check.click()
 
     context.continuar_btn = context.web.find_element_by_xpath(
-        '/html/body/div[1]/div/form/div/section[3]/button[2]')
+        '//*[@id="root"]/div/form/div/section[3]/button[2]')
     context.continuar_btn.click()
 
 
 @then(u'devo ser redirecionado para a terceira etapa')
 def checa_terceira_etapa_cadastro(context):
+    wait = WebDriverWait(context.web, 3)
+    wait.until(ec.visibility_of_element_located(
+        (By.CLASS_NAME, 'experiencias-do-usuario')), message='Elemento com a classe "experiencias-do-usuario" era esperado e não foi encontrado.')
+
+
+@given(u'estou na pagina da terceira etapa do cadastro')
+def checa_pagina_terceira_etapa(context):
     if 'Nos conte sua experiência' not in context.web.page_source:
         raise Exception(
             'Texto "Nos conte sua experiência" era esperado e não foi encontrado.')
+
+
+@when(u'clico no botao de adicionar cadastro de Educação')
+def clica_adicionar_educacao(context):
+    context.adicionar_educacao = context.web.find_element_by_xpath(
+        '//*[@id="root"]/div/div/section[1]/h2/button')
+    context.adicionar_educacao.click()
+
+
+@when(u'preencho a etapa de Educação do formulario de cadastro')
+def preenche_educacao_formulario(context):
+    context.instituicao_input = context.web.find_element_by_id('instituicao')
+    context.instituicao_input.send_keys(name_generator())
+
+    context.curso_input = context.web.find_element_by_id('curso')
+    context.curso_input.send_keys(name_generator())
+
+    context.descricao_input = context.web.find_element_by_id('descricao')
+    context.descricao_input.send_keys(description_generator())
+
+    # Terminar a escrita para os campos: Nível de formação, Ano inicial, Ano final.
+
+
+@when(u'clico no botao de salvar cadastro de Educação')
+def clica_salvar_educacao(context):
+    context.salvar_educacao = context.web.find_element_by_xpath(
+        '//*[@id="root"]/div/div/section[1]/form/aside/section[5]/button[1]')
+    context.salvar_educacao.click()
+
+
+@then(u'uma nova experiencia educacional deve ser cadastrada')
+def checa_educacao_cadastrada(context):
+    wait = WebDriverWait(context.web, 3)
+    context.resultado_busca_item1 = wait.until(ec.presence_of_element_located(
+        (By.CLASS_NAME, 'experiencia-cadastrada')), message='Registro de "Experiencia Cadastrada" era esperado e não foi encontrado.')
