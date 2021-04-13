@@ -18,8 +18,10 @@ def preenche_formulario(context):
     context.senha_input = context.web.find_element_by_id('senha')
     context.senha_input.send_keys('Qwaszx12@')
 
-    context.submit = context.web.find_element_by_class_name('sc-iqHYGH')
-    context.submit.click()
+@when(u'clico no botao de logar')
+def step_impl(context):
+    context.login_btn = context.web.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div/section[2]/form/button')
+    context.login_btn.click()
 
 
 @then(u'devo ser logado na plataforma')
@@ -30,7 +32,5 @@ def checa_icone_usuario_logado(context):
 
 @then(u'devo ser redirecionado para a página Explorar')
 def checa_redirecionado_explorar(context):
-    if "/explorar" in context.web.current_url:
-        return True
-    else:
-        return False
+    if "/explorar" not in context.web.current_url:
+        raise Exception('Rota "/explorar" era esperada e não foi encontrada.')

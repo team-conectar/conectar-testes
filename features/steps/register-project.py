@@ -3,7 +3,6 @@ from utils.data_generator import name_generator
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-import time
 
 
 @when(u'clico no botao para cadastrar um novo projeto')
@@ -35,8 +34,6 @@ def preenche_etapa1_formulario(context):
 
 @then(u'devo ser redirecionado para a segunda etapa')
 def checa_segunda_etapa_cadastro(context):
-    return True
-    if 'Ferramentas, matérias e habilidades que o time precisa dominar' in context.web.page_source:
-        return True
-    else:
-        return False
+    if 'Ferramentas, matérias e habilidades que o time precisa dominar' not in context.web.page_source:
+        raise Exception(
+            'Texto "Ferramentas, matérias e habilidades que o time precisa dominar" era esperado e não foi encontrado.')

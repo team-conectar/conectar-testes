@@ -110,7 +110,5 @@ def preenche_etapa2_formulario(context):
 
 @then(u'devo ser redirecionado para a terceira etapa')
 def checa_terceira_etapa_cadastro(context):
-    if 'Nos conte sua experiência' in context.web.page_source:
-        return True
-    else:
-        return False
+    if 'Nos conte sua experiência' not in context.web.page_source:
+        raise Exception('Texto "Nos conte sua experiência" era esperado e não foi encontrado.')
