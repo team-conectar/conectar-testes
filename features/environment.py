@@ -4,7 +4,7 @@ import os
 
 def before_all(context):
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--headless")
     context.web = webdriver.Chrome(
         executable_path='dependency/chromedriver.exe', chrome_options=chrome_options)
 

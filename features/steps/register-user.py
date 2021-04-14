@@ -140,7 +140,67 @@ def preenche_educacao_formulario(context):
     context.descricao_input = context.web.find_element_by_id('descricao')
     context.descricao_input.send_keys(description_generator())
 
-    # Terminar a escrita para os campos: Nível de formação, Ano inicial, Ano final.
+    context.concluido_check = context.web.find_element_by_xpath(
+        '//*[@id="root"]/div/div/section[1]/form/aside/section[3]/div/label[3]')
+    context.concluido_check.click()
+
+    # Nível Formação
+    context.nivel_formacao_arrow = context.web.find_element_by_xpath(
+        '//*[@id="root"]/div/div/section[1]/form/aside/section[2]/div/label/div/div/div[2]')
+    context.nivel_formacao_arrow.click()
+
+    context.nivel_formacao_input = context.web.find_element_by_id(
+        'escolaridade')
+    context.nivel_formacao_input.send_keys('Mestrado')
+
+    wait = WebDriverWait(context.web, 3)
+    wait.until(ec.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'div.react-select__menu')), message='Select de "Nível de Formação" era esperado e não foi encontrado.')
+
+    context.nivel_formacao_selector = context.web.find_element_by_css_selector(
+        'div.react-select__menu')
+
+    context.nivel_formacao_option = context.web.find_element_by_xpath(
+        '//div[contains(@class, "react-select__option")]')
+    context.nivel_formacao_option.click()
+
+    # Ano Inicial
+    context.ano_inicial_arrow = context.web.find_element_by_xpath(
+        '//*[@id="root"]/div/div/section[1]/form/aside/section[2]/aside/div[1]/label/div/div/div[2]')
+    context.ano_inicial_arrow.click()
+
+    context.ano_inicial_input = context.web.find_element_by_id('data_inicio')
+    context.ano_inicial_input.send_keys(1990)
+
+    wait = WebDriverWait(context.web, 3)
+    wait.until(ec.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'div.react-select__menu')), message='Select de "Ano Inicial" era esperado e não foi encontrado.')
+
+    context.ano_inicial_selector = context.web.find_element_by_css_selector(
+        'div.react-select__menu')
+
+    context.ano_inicial_option = context.web.find_element_by_xpath(
+        '//div[contains(@class, "react-select__option")]')
+    context.ano_inicial_option.click()
+
+    # Ano Final
+    context.ano_final_arrow = context.web.find_element_by_xpath(
+        '//*[@id="root"]/div/div/section[1]/form/aside/section[2]/aside/div[2]/label/div/div/div[2]/div')
+    context.ano_final_arrow.click()
+
+    context.ano_final_input = context.web.find_element_by_id('data_fim')
+    context.ano_final_input.send_keys(1995)
+
+    wait = WebDriverWait(context.web, 3)
+    wait.until(ec.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'div.react-select__menu')), message='Select de "Ano Final" era esperado e não foi encontrado.')
+
+    context.ano_final_selector = context.web.find_element_by_css_selector(
+        'div.react-select__menu')
+
+    context.ano_final_option = context.web.find_element_by_xpath(
+        '//div[contains(@class, "react-select__option")]')
+    context.ano_final_option.click()
 
 
 @when(u'clico no botao de salvar cadastro de Educação')
