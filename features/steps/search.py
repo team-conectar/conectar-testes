@@ -14,8 +14,9 @@ def clica_btn_busca(context):
 @then(u'projetos e pessoas devem ser retornadas')
 def checa_retorno_projetos_pessoas(context):
     wait = WebDriverWait(context.web, 10)
-    context.area_desenvolvimento = wait.until(ec.presence_of_element_located(
-        (By.XPATH, '//*[@id="root"]/div/aside/h2')))
+    context.resultado_busca_item1 = wait.until(ec.presence_of_element_located(
+        (By.XPATH, '//*[@id="root"]/div/ul/li[1]')))
+
     if 'Nenhum projeto encontrado.' in context.web.page_source:
         raise Exception('Nenhum projeto foi encontrado.')
 
