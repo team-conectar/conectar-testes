@@ -215,3 +215,104 @@ def checa_educacao_cadastrada(context):
     wait = WebDriverWait(context.web, 3)
     context.resultado_busca_item1 = wait.until(ec.presence_of_element_located(
         (By.CLASS_NAME, 'experiencia-cadastrada')), message='Registro de "Experiencia Cadastrada" era esperado e não foi encontrado.')
+
+
+@when(u'clico no botao de adicionar cadastro de Atuação Profissional')
+def clica_adicionar_atuacao_profissional(context):
+    context.adicionar_educacao = context.web.find_element_by_xpath(
+        '//*[@id="root"]/div/div/section[2]/h2/button')
+    context.adicionar_educacao.click()
+
+
+@when(u'preencho a etapa de Atuação Profissional do formulario de cadastro')
+def preenche_atuacao_profissional_formulario(context):
+    context.organizacao_input = context.web.find_element_by_id('organizacao')
+    context.organizacao_input.send_keys(name_generator())
+
+    context.cargo_input = context.web.find_element_by_id('cargo')
+    context.cargo_input.send_keys(name_generator())
+
+    context.cargo_input = context.web.find_element_by_id('descricao')
+    context.cargo_input.send_keys(name_generator())
+
+    # Vínculo
+    context.nivel_formacao_arrow = context.web.find_element_by_xpath(
+        '//*[@id="root"]/div/div/section[2]/form/aside/section[2]/div/label/div/div/div[2]')
+    context.nivel_formacao_arrow.click()
+
+    context.nivel_formacao_input = context.web.find_element_by_id(
+        'vinculo')
+    context.nivel_formacao_input.send_keys('Freelance')
+
+    wait = WebDriverWait(context.web, 3)
+    wait.until(ec.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'div.react-select__menu')), message='Select de "Nível de Formação" era esperado e não foi encontrado.')
+
+    context.nivel_formacao_selector = context.web.find_element_by_css_selector(
+        'div.react-select__menu')
+
+    context.nivel_formacao_option = context.web.find_element_by_xpath(
+        '//div[contains(@class, "react-select__option")]')
+    context.nivel_formacao_option.click()
+
+    # Mês inicial
+    context.month_input = context.web.find_element_by_id('initialMonth')
+    context.month_input.send_keys(5)
+
+    wait = WebDriverWait(context.web, 3)
+    wait.until(ec.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'div.react-select__menu')), message='Select de "Mês inicial" era esperado e não foi encontrado.')
+
+    context.month_option = context.web.find_element_by_xpath(
+        '//div[contains(@class, "react-select__option")]')
+    context.month_option.click()
+
+    # Ano inicial
+    context.month_input = context.web.find_element_by_id('initialYear')
+    context.month_input.send_keys(1990)
+
+    wait = WebDriverWait(context.web, 3)
+    wait.until(ec.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'div.react-select__menu')), message='Select de "Ano inicial" era esperado e não foi encontrado.')
+
+    context.month_option = context.web.find_element_by_xpath(
+        '//div[contains(@class, "react-select__option")]')
+    context.month_option.click()
+
+    # Mês final
+    context.month_input = context.web.find_element_by_id('finalMonth')
+    context.month_input.send_keys(5)
+
+    wait = WebDriverWait(context.web, 3)
+    wait.until(ec.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'div.react-select__menu')), message='Select de "Mês final" era esperado e não foi encontrado.')
+
+    context.month_option = context.web.find_element_by_xpath(
+        '//div[contains(@class, "react-select__option")]')
+    context.month_option.click()
+
+    # Ano final
+    context.month_input = context.web.find_element_by_id('finalYear')
+    context.month_input.send_keys(1995)
+
+    wait = WebDriverWait(context.web, 3)
+    wait.until(ec.element_to_be_clickable(
+        (By.CSS_SELECTOR, 'div.react-select__menu')), message='Select de "Ano final" era esperado e não foi encontrado.')
+
+    context.month_option = context.web.find_element_by_xpath(
+        '//div[contains(@class, "react-select__option")]')
+    context.month_option.click()
+
+
+@when(u'clico no botao de salvar cadastro de Atuação Profissional')
+def clica_salvar_atuacao_profissional(context):
+    context.salvar_atuacao_profissional = context.web.find_element_by_xpath(
+        '//*[@id="root"]/div/div/section[2]/form/aside/section[5]/button[1]')
+    context.salvar_atuacao_profissional.click()
+
+
+@then(u'uma nova atuação profissional deve ser cadastrada')
+def checa_atuacao_profissional_cadastrada(context):
+    wait = WebDriverWait(context.web, 3)
+    context.resultado_busca_item1 = wait.until(ec.presence_of_element_located(
+        (By.CLASS_NAME, 'atuacao-profissional-cadastrada')), message='Registro de "Atuação Profissional" era esperado e não foi encontrado.')
